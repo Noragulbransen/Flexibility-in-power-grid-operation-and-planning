@@ -253,10 +253,6 @@ plt.plot(df_sorted["agg_load_mw"], df_sorted["vmin_pu"], "-", linewidth=2)
 plt.axhline(0.95, linestyle="--", color="red", label="0.95 p.u. limit")
 if np.isfinite(agg_at_095):
     plt.axvline(agg_at_095, linestyle=":", color="gray")
-    plt.annotate(f"≈ {agg_at_095:.3f} MW @ 0.95 p.u.",
-                 xy=(agg_at_095, 0.95), xytext=(10, 15),
-                 textcoords="offset points", arrowprops=dict(arrowstyle="->"))
-
 plt.xlabel("Aggregated area load [MW]")
 plt.ylabel("Lowest voltage in area [p.u.]")
 plt.title("Lowest voltage vs aggregated area load")
