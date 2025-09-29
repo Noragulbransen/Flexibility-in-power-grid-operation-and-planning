@@ -29,7 +29,8 @@ import numpy as np
 
 # Location of (processed) data set for CINELDI MV reference system
 # (to be replaced by your own local data folder)
-path_data_set         = r"C:\Users\nora0\OneDrive - NTNU\5. KLASSE\GridOptimation\CINELDI_MV_reference_system-flexibility_course_NTNU_public\Data_sets" + "\\"
+#path_data_set         = r"C:\Users\nora0\OneDrive - NTNU\5. KLASSE\GridOptimation\CINELDI_MV_reference_system-flexibility_course_NTNU_public\Data_sets" + "\\"
+path_data_set = 'CINELDI_MV_reference_system-flexibility_course_NTNU_public/Data_sets'
 
 filename_load_data_fullpath = os.path.join(path_data_set,'load_data_CINELDI_MV_reference_system.csv')
 filename_load_mapping_fullpath = os.path.join(path_data_set,'mapping_loads_to_CINELDI_MV_reference_grid.csv')
