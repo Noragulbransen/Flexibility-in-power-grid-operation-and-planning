@@ -316,3 +316,54 @@ plt.show()
 
 
 print('-----------Opg 6------------')
+
+#Calculate the utilization time of grid capacity at agg_load_max
+utilization_time = np.sum(load_duration_curve / agg_load_max)
+print(f'Utilization time of grid capacity at agg_load_max: {utilization_time:.2f} hours')
+
+#Plot the load duration curve for the aggregatet load time series for the area
+load_duration_curve = np.sort(load_time_series_area_agg.values)[::-1]
+plt.figure(figsize=(10,4))
+plt.plot(load_duration_curve)
+#Include grid capacity limit P_lim
+plt.axhline(P_lim, color='red', linestyle='--', label=f'Grid capacity limit P_lim = {P_lim} MW')
+#Plot agg_load_max
+plt.axhline(agg_load_max, color='green', linestyle='--', label=f'Area max load = {agg_load_max:.5f} MW')
+#Plot utliization time of grid capacity at agg_load_max
+plt.axvline(np.sum(utilization_time), color='orange', linestyle='--', label=f'Utilization time at agg_load_max = {np.sum(utilization_time)} hours')
+plt.legend()
+plt.xlabel('Hours')
+plt.ylabel('Load demand (MW)')
+plt.title('Load duration curve for the area (bus 90, 91, 92, 96)')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+
+print('-----------Opg 7------------')
+
+
+#Add new load time series to the aggregated load time series for the area
+new_load_time_series_area_agg = load_time_series_area_agg.values + new_load_time_series.values
+
+print(new_load_time_series_area_agg)
+
+# Find the maximum value in the aggregated load time series for the area
+new_agg_load_max = new_load_time_series_area_agg.max()
+print(f'Maximum load demand for the area (bus 90, 91, 92, 96): {new_agg_load_max:.5f} MW')
+
+#Plot the load duration curve for the aggregatet load time series for the area
+new_load_duration_curve = np.sort(new_load_time_series_area_agg)[::-1]
+plt.figure(figsize=(10,4))
+plt.plot(new_load_duration_curve)
+#Include grid capacity limit P_lim
+plt.axhline(P_lim, color='red', linestyle='--', label=f'Grid capacity limit P_lim = {P_lim} MW')
+#Plot new_agg_load_max
+plt.axhline(new_agg_load_max, color='green', linestyle='--', label=f'Area max load = {new_agg_load_max:.5f} MW')
+plt.legend()
+plt.xlabel('Hours')
+plt.ylabel('Load demand (MW)')
+plt.title('New Load duration curve for the area (bus 90, 91, 92, 96) with new load added')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
