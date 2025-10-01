@@ -296,4 +296,23 @@ print('-----------Opg 4------------')
 agg_load_max = load_time_series_area_agg.max()
 print(f'Maximum load demand for the area (bus 90, 91, 92, 96): {agg_load_max:.5f} MW')
 
+print('-----------Opg 5------------')
 
+#Plot the load duration curve for the aggregatet load time series for the area
+load_duration_curve = np.sort(load_time_series_area_agg.values)[::-1]
+plt.figure(figsize=(10,4))
+plt.plot(load_duration_curve)
+#Include grid capacity limit P_lim
+plt.axhline(P_lim, color='red', linestyle='--', label=f'Grid capacity limit P_lim = {P_lim} MW')
+#Plot agg_load_max
+plt.axhline(agg_load_max, color='green', linestyle='--', label=f'Area max load = {agg_load_max:.5f} MW')
+plt.legend()
+plt.xlabel('Hours')
+plt.ylabel('Load demand (MW)')
+plt.title('Load duration curve for the area (bus 90, 91, 92, 96)')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+
+print('-----------Opg 6------------')
