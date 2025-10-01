@@ -75,7 +75,7 @@ load_time_series_mapped = profiles_mapped.mul(net.load['p_mw'])
 # %%
 
 
-
+print('-----------OPG1)------------')
 # OPPGAVE 1
 # %% Voltage profile along the main feeder (bus 0 -> bus 96)
 
@@ -150,7 +150,7 @@ vmin = vm_area.min()
 bus_min = vm_area.idxmin()
 print(f"Minste spenning i området {area_buses}: {vmin:.4f} p.u. (på bus {bus_min})")
 
-
+print('-----------OPG2------------')
 # OPPGAVE 2
 # %% OPPGAVE 2: How voltage decreases as area load increases (matplotlib)
 import numpy as np
@@ -262,5 +262,38 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
+print('-----------OPG3------------')
+# OPPGAVE 3
+
+print('-----------Load time series mapped: ------------')
+print(load_time_series_mapped)
+print('-----------Load time series area:------------')
+# Our four load points of interest: bus 90, 91, 92, 96
+load_time_series_area = load_time_series_mapped[area_labels]
+print(load_time_series_area)
+print('-----------Load time series aggreagated:------------')
+# Time series for aggregated load demand for the four points of interest
+load_time_series_area_agg = load_time_series_area.sum(axis=1)
+print(load_time_series_area_agg)
+
+
+# Plot load time series for the area
+plt.figure(figsize=(10,4))
+plt.plot(load_time_series_area.index, load_time_series_area.values, label=['Bus 90','Bus 91','Bus 92','Bus 96'])
+plt.plot(load_time_series_area_agg.index, load_time_series_area_agg.values, label='Aggregated load demand for area (bus 90, 91, 92, 96)')
+plt.xlabel('Hour of the year')
+plt.ylabel('Load demand (MW)')
+plt.title('Load time series for the area')
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show() 
+
+
+print('-----------Opg 4------------')
+
+# Find the maximum value in the aggregated load time series for the area
+agg_load_max = load_time_series_area_agg.max()
+print(f'Maximum load demand for the area (bus 90, 91, 92, 96): {agg_load_max:.5f} MW')
 
 
